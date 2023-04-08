@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSettings = {
     databaseURL: "https://justaddtocart-default-rtdb.asia-southeast1.firebasedatabase.app/" 
@@ -27,7 +27,7 @@ onValue(shoppingListInDB, (snapshot) => {
         const currentItemID = item[0]
         const currentItemValue = item[1]
 
-        appendItemToShoppingListEl(currentItemValue)
+        appendItemToShoppingListEl(item)
     })
 })
 
@@ -39,8 +39,17 @@ function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""
 }
 
-function appendItemToShoppingListEl(itemValue) {
+function appendItemToShoppingListEl(item) {
+    const itemID = item[0]
+    const itemValue = item[1]
+
     const newItem = document.createElement('li')
     newItem.textContent = itemValue
+
+    newItem.addEventListener('click', () => {
+        const itemLocation = ref(database, `shoppingList/${itemID}`)
+        remove(itemLocation)
+    })
+
     shoppingListEl.append(newItem)
 }
