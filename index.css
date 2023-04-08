@@ -39,4 +39,22 @@ input {
 button {
     color: #FDFDFD;
     background-color: #AC485A;
+    margin-bottom: 1em
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+ul li {
+    font-size: 1.2rem;
+    background-color: #FFFDF8;
+    padding: 1em;
+    border-radius: 8px;
+    flex-grow: 1;
+    text-align: center;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
 }
