@@ -21,14 +21,18 @@ addButtonEl.addEventListener("click", () => {
 })
 
 onValue(shoppingListInDB, (snapshot) => {
-    clearShoppingListEl()   
-    const itemsArray = Object.entries(snapshot.val())
-    itemsArray.forEach((item) => {
-        const currentItemID = item[0]
-        const currentItemValue = item[1]
-
-        appendItemToShoppingListEl(item)
-    })
+    if(snapshot.exists()) {
+        clearShoppingListEl()   
+        const itemsArray = Object.entries(snapshot.val())
+        itemsArray.forEach((item) => {
+            const currentItemID = item[0]
+            const currentItemValue = item[1]
+    
+            appendItemToShoppingListEl(item)
+        })
+    } else {
+        shoppingListEl.innerHTML = "No items in the cart..."
+    }
 })
 
 function clearInputFieldEl() {
