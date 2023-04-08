@@ -21,11 +21,13 @@ addButtonEl.addEventListener("click", () => {
 })
 
 onValue(shoppingListInDB, (snapshot) => {
-    clearShoppingListEl()
-
-    const itemsArray = Object.values(snapshot.val())
+    clearShoppingListEl()   
+    const itemsArray = Object.entries(snapshot.val())
     itemsArray.forEach((item) => {
-        appendItemToShoppingListEl(item)
+        const currentItemID = item[0]
+        const currentItemValue = item[1]
+
+        appendItemToShoppingListEl(currentItemValue)
     })
 })
 
@@ -38,5 +40,7 @@ function clearShoppingListEl() {
 }
 
 function appendItemToShoppingListEl(itemValue) {
-    shoppingListEl.innerHTML += `<li>${itemValue}</li>`
+    const newItem = document.createElement('li')
+    newItem.textContent = itemValue
+    shoppingListEl.append(newItem)
 }
