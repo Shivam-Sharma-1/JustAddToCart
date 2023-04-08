@@ -50,7 +50,7 @@ function appendItemToShoppingListEl(item) {
     const newItem = document.createElement('li')
     newItem.textContent = itemValue
 
-    newItem.addEventListener('click', () => {
+    newItem.addEventListener('dblclick', () => {
         const itemLocation = ref(database, `shoppingList/${itemID}`)
         remove(itemLocation)
     })
