@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSettings = {
     databaseURL: "https://justaddtocart-default-rtdb.asia-southeast1.firebasedatabase.app/" 
@@ -19,6 +19,10 @@ addButtonEl.addEventListener("click", () => {
     push(shoppingListInDB, inputValue)
     clearInputFieldEl()
     appendItemToShoppingListEl(inputValue)
+})
+
+onValue(shoppingListInDB, (snapshot) => {
+    const itemsArray = Object.values(snapshot)
 })
 
 function clearInputFieldEl() {
